@@ -15,15 +15,15 @@ double calcularPi() {
 
     double delta = 1.0 / N; // Tamaño de cada subintervalo
 
-    for (int i = 0; i < N; i++) {
+    for(int i = 0; i < N; i++) {
         base = f(i * delta); // Extremo izquierdo del trapecio
         base += f((i + 1) * delta); // Extremo derecho del trapecio
         altura = delta; // Altura del trapecio
 
-        area += (base * altura) / 2; // Área del trapecio
+        area = area + (base * altura) / 2; // Área del trapecio
     }
 
-    return area * 4; // Multiplicamos por 4 para obtener el área del cuarto de círculo
+    return area * 4; // Multiplicar por 4 para obtener el área del cuarto de círculo
 }
 
 int main() {
@@ -39,7 +39,8 @@ int main() {
     tiempo = (double)(end.tv_sec - start.tv_sec) + (double)(end.tv_usec - start.tv_usec) / 1000000; // Cálculo del tiempo transcurrido
 
     printf("Valor aproximado de PI: %.10f\n", pi);
-    printf("Tiempo transcurrido: %.6f segundos\n", tiempo);
+    printf("Tiempo transcurrido: %.5f segundos\n", tiempo);
     
     return 0;
 }
+
