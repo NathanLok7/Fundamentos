@@ -1,0 +1,28 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+int main() {
+    pid_t pid;
+    pid = fork();
+
+    if (pid == -1) {
+        perror("Error al crear proceso hijo");
+        exit(EXIT_FAILURE);
+    } else if (pid == 0) {
+        // Si existe el padre se ejecuta el codigo del hijo
+        printf("Proceso hijo iniciado. PID: %d\n", getpid());
+        sleep(1);  // El proceso hijo espera 1 segundos
+        printf("Proceso hijo finalizado.\n");
+    } else {
+        // Código del proceso padre
+        printf("Proceso padre iniciado. PID: %d\n", getpid());
+        sleep(20); // El proceso padre espera 20 segundos
+        printf("Proceso padre finalizado.\n");
+    }
+
+    return 0;
+}
