@@ -19,15 +19,16 @@ int is_prime(int num) {
 void* count_primes(void* arg) {
     int start = *((int*)arg);
     int end = start + 2500000; // Each thread processes 2,500,000 numbers
-    int count = 0;
+    int* count = malloc(sizeof(int));
+    *count = 0;
 
     for (int i = start; i < end; ++i) {
         if (is_prime(i)) {
-            count++;
+            (*count)++;
         }
     }
 
-    return (void*)(intptr_t)count;
+    return count;
 }
 
 int main(int argc, char* argv[]) {
@@ -56,10 +57,11 @@ int main(int argc, char* argv[]) {
         int* thread_count;
         pthread_join(threads[i], (void**)&thread_count);
         total_primes += *thread_count;
+        free(thread_count); // Liberar la memoria asignada en count_primes
     }
 
     gettimeofday(&end_time, NULL);
-    double execution_time = (end_time.tv_sec - start_time.tv_sec) * 1000.0; // Convert to milliseconds
+    double execution_time = (end_time.tv_sec - start_time.tv_sec) * 1000.0; // Convertir a milisegundos
     execution_time += (end_time.tv_usec - start_time.tv_usec) / 1000.0;
 
     printf("Total primes between %d and %d: %d\n", start, end, total_primes);
