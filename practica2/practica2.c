@@ -31,10 +31,14 @@ void* count_primes(void* arg) {
     return result;
 }
 
-int main() {
-    int start, end;
-    printf("Enter the range (start end): ");
-    scanf("%d %d", &start, &end);
+int main(int argc, char* argv[]) {
+    if (argc != 3) {
+        printf("Usage: %s <start> <end>\n", argv[0]);
+        return 1;
+    }
+
+    int start = atoi(argv[1]);
+    int end = atoi(argv[2]);
 
     struct timeval start_time, end_time;
     gettimeofday(&start_time, NULL);
