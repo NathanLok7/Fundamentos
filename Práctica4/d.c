@@ -43,8 +43,6 @@ void master_proc(int read_fds[]) {
         total_sum += partial_sum;
         close(read_fds[i]);
     }
-    printf("El recuento de ln(1 + x) miembros de la serie de Mercator es %d\n", SERIES_MEMBER_COUNT);
-    printf("El valor del argumento x es %f\n", x);
     printf("El resultado es %10.8f\n", total_sum);
     printf("Llamando a la función ln(1 + %f) = %10.8f\n", x, log(1 + x));
 }
@@ -56,6 +54,10 @@ int main() {
     int pipe_fds[NPROCS][2];
     pid_t pid;
     int i;
+
+    // Inicio programa
+    printf("El recuento de ln(1 + x) miembros de la serie de Mercator es %d\n", SERIES_MEMBER_COUNT);
+    printf("El valor del argumento x es %f\n", x);
 
     // Crear pipes para la comunicación entre procesos
     for (i = 0; i < NPROCS; i++) {
