@@ -23,6 +23,7 @@ double get_member(int n, double x) {
     }
 }
 
+// Función para el proceso hijo (esclavo) que calcula una parte de la suma
 void slave_proc(int proc_num, int write_fd) {
     int i;
     double sum = 0.0;
@@ -51,7 +52,7 @@ int main() {
     struct timeval start_time, stop_time;
     long long elapsed_time;
 
-    int pipe_fds[NPROCS][2];
+    int pipe_fds[NPROCS][2]; // Array de pipes para la comunicación
     pid_t pid;
     int i;
 
